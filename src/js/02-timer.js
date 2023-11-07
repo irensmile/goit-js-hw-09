@@ -19,7 +19,6 @@ const options = {
         else{
             button.removeAttribute("disabled");
         }
-      console.log(selectedDates[0]);
     },
   };
 
@@ -49,12 +48,16 @@ button.addEventListener("click", (() => {
         const now = new Date();
         const diffMs = selectedDate - now;
         if (diffMs >= 0) {
-            let diff = convertMs(diffMs);
-            document.querySelector("[data-days]").textContent = diff.days;
-            document.querySelector("[data-hours]").textContent = diff.hours;
-            document.querySelector("[data-minutes]").textContent = diff.minutes;
-            document.querySelector("[data-seconds]").textContent = diff.seconds;
+          let diff = convertMs(diffMs);
+          console.log(diff.days);
+            document.querySelector("[data-days]").textContent = addLeadingZero(diff.days);
+            document.querySelector("[data-hours]").textContent = addLeadingZero(diff.hours);
+            document.querySelector("[data-minutes]").textContent = addLeadingZero(diff.minutes);
+            document.querySelector("[data-seconds]").textContent = addLeadingZero(diff.seconds);
         }
     }, 1000);
-    
 }));
+
+function addLeadingZero(value) {
+  return value.toString().padStart(2, '0');
+}
